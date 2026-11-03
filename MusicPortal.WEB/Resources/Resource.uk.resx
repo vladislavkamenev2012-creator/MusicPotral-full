@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>Музичний портал</value></data>
+  <data name="Songs" xml:space="preserve"><value>Пісні</value></data>
+  <data name="Admin" xml:space="preserve"><value>Панель Адміна</value></data>
+  <data name="Login" xml:space="preserve"><value>Вхід</value></data>
+  <data name="Register" xml:space="preserve"><value>Реєстрація</value></data>
+  <data name="Logout" xml:space="preserve"><value>Вихід</value></data>
+  <data name="Search" xml:space="preserve"><value>Пошук</value></data>
+  <data name="Genre" xml:space="preserve"><value>Жанр</value></data>
+  <data name="AddSong" xml:space="preserve"><value>Додати нову пісню</value></data>
+  <data name="ReqTitle" xml:space="preserve"><value>Назва пісні є обов'язковою.</value></data>
+  <data name="ReqArtist" xml:space="preserve"><value>Ім'я виконавця є обов'язковим.</value></data>
+  <data name="ReqGenre" xml:space="preserve"><value>Оберіть жанр.</value></data>
+  <data name="ReqFile" xml:space="preserve"><value>Будь ласка, завантажте аудіофайл.</value></data>
+  <data name="ReqUsername" xml:space="preserve"><value>Введіть ім'я користувача.</value></data>
+  <data name="ReqPassword" xml:space="preserve"><value>Введіть пароль.</value></data>
+</root>

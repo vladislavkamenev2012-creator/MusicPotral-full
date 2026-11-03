@@ -1,0 +1,37 @@
+@model MusicPortal.WEB.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = Localizer["Register"];
+}
+
+<h2>@Localizer["RegisterHeading"]</h2>
+<hr />
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label class="form-label">@Localizer["DesiredUsername"]</label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">@Localizer["Password"]</label>
+                    <input asp-for="Password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">@Localizer["SubmitRequest"]</button>
+            </form>
+        </div>
+    </div>
+}

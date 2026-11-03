@@ -1,0 +1,84 @@
+@model MusicPortal.WEB.Models.SongListViewModel
+
+@{
+    ViewData["Title"] = Localizer["Songs"];
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>🎵 @Localizer["Songs"]</h2>
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <a asp-action="Create" class="btn btn-success">+ @Localizer["AddSong"]</a>
+    }
+</div>
+
+<!-- Filters & Search Form -->
+<form method="get" class="card card-body bg-light mb-4">
+    <div class="row g-3">
+        <div class="col-md-5">
+            <input type="text" name="search" class="form-control" placeholder="@Localizer["Search"]..." value="@Model.Search" />
+        </div>
+        <div class="col-md-4">
+            <select name="genreId" class="form-select">
+                <option value="">-- @Localizer["Genre"] (@Localizer["All"]) --</option>
+                @foreach (var g in Model.Genres)
+                {
+                    <option value="@g.Id" selected="@(g.Id == Model.GenreId)">@g.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary w-100">@Localizer["Filter"]</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">@Localizer["Reset"]</a>
+        </div>
+    </div>
+</form>
+
+<!-- Song List Table -->
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                <sort-header action="Index" property="title" current-sort="@Model.SortOrder">@Localizer["ColTitle"]</sort-header>
+            </th>
+            <th>
+                <sort-header action="Index" property="artist" current-sort="@Model.SortOrder">@Localizer["Artist"]</sort-header>
+            </th>
+            <th>@Localizer["Genre"]</th>
+            <th>@Localizer["PlayerDownload"]</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>@Localizer["Actions"]</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Songs)
+        {
+            <tr>
+                <td><strong>@item.Title</strong></td>
+                <td>@item.Artist</td>
+                <td><span class="badge bg-secondary">@item.GenreName</span></td>
+                <td>
+                    <audio controls style="height: 35px;" class="me-2">
+                        <source src="@item.FilePath" type="audio/mpeg">
+                    </audio>
+                    <a href="@item.FilePath" download class="btn btn-sm btn-outline-primary">💾 @Localizer["Download"]</a>
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('@Localizer["ConfirmDeleteSong"]');">
+                            <button type="submit" class="btn btn-danger btn-sm">🗑️</button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination TagHelper -->
+<div class="d-flex justify-content-center mt-4">
+    <page-link page-model="@Model.PageInfo" page-action="Index"></page-link>
+</div>
